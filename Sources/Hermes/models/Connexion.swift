@@ -38,7 +38,7 @@ struct DbContext {
 
 class Connexion {
     let psqlConnection: PostgreSQLConnection
-    public let pool: ConnectionPool
+    public let pool: ConnectionPool? = nil
     public static var shared: Connexion? = nil
     var semaphores = [String:DispatchSemaphore]()
 
@@ -53,12 +53,12 @@ class Connexion {
             .password(context.pass),
             .connectionTimeout(context.timeout)
         ])
-        pool = PostgreSQLConnection.createPool(host: context.host, port: context.port, options: [
-            .databaseName(context.dbname),
-            .userName(context.user),
-            .password(context.pass),
-            .connectionTimeout(context.timeout)
-        ], poolOptions: ConnectionPoolOptions(initialCapacity: 1))
+//        pool = PostgreSQLConnection.createPool(host: context.host, port: context.port, options: [
+//            .databaseName(context.dbname),
+//            .userName(context.user),
+//            .password(context.pass),
+//            .connectionTimeout(context.timeout)
+//        ], poolOptions: ConnectionPoolOptions(initialCapacity: 1))
     }
     
     public func exec(query: String) {
