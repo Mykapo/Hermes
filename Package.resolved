@@ -21,11 +21,11 @@
       },
       {
         "package": "GaiaCodables",
-        "repositoryURL": "https://github.com/Zyigh/GaiaCodables",
+        "repositoryURL": "https://github.com/Mykapo/GaiaCodables",
         "state": {
           "branch": null,
-          "revision": "fbe79324d19c3eb99aa0a2cb5355554316e5ca26",
-          "version": "0.0.2"
+          "revision": "d397eed1ac26958b04082688cd3c8c4e7083efb0",
+          "version": "0.0.0"
         }
       },
       {

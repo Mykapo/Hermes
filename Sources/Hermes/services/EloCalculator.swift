@@ -5,6 +5,8 @@
 import Foundation
 import GaiaCodables
 
+typealias MissionCategory = EloCalculator.PickleField
+
 class EloCalculator {
     enum Result: Double {
         case victory = 1.0

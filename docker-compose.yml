@@ -1,0 +1,30 @@
+version: '2'
+services:
+  postgres:
+    image: fintrace/postgres-uuid
+    container_name: ceres_postgres
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    env_file:
+      - ./global.env
+  #  volumes:
+  #    - ~/.workspace/databases/postgres:/var/lib/mysql
+
+  swift:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/swift/Dockerfile
+    container_name: ceres_api
+    depends_on:
+      - "postgres"
+    ports:
+      - 8080:80
+    expose:
+      - 80
+    links:
+      - postgres
+    environment:
+      - PG_HOST=postgres
+      - PG_PORT=5432

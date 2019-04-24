@@ -3,6 +3,7 @@
 //
 
 import Foundation
-import Dispatch
 
-
+struct ConnexionImpossible: Error {
+    let localizedDescription = "Connexion impossible"
+}

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker run -it --link ceres_postgres:ceres_postgres --rm fintrace/postgres-uuid sh -c "psql ceres_test -h localhost -U admin"

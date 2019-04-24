@@ -6,9 +6,13 @@ RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install libz-dev libpq-dev -y
 
 WORKDIR /hermes
-ADD / .
-RUN swift build -c release -Xcc -I/usr/include/postgresql
+COPY / .
+#RUN chown -R $(whoami) .
+#RUN chmod 777 ./wait-for-pg.sh
+#RUN swift build -c release -Xcc -I/usr/include/postgresql
+RUN swift build -Xcc -I/usr/include/postgresql
 
 EXPOSE 80
 
-CMD ./.build/x86_64-unknown-linux/release/Hermes
+#CMD ./.build/x86_64-unknown-linux/release/Hermes
+CMD ./.build/x86_64-unknown-linux/debug/Hermes
