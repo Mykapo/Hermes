@@ -21,10 +21,13 @@ services:
       - "postgres"
     ports:
       - 8080:80
+      - 80:80
     expose:
       - 80
     links:
       - postgres
+    env_file:
+      - ./global.env
     environment:
-      - PG_HOST=postgres
-      - PG_PORT=5432
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432

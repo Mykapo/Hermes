@@ -7,11 +7,30 @@ import GaiaCodables
 
 HeliumLogger.use()
 
+guard let dbname = ProcessInfo.processInfo.environment["POSTGRES_DB"],
+      let dbuser = ProcessInfo.processInfo.environment["POSTGRES_USER"],
+      let dbpass = ProcessInfo.processInfo.environment["POSTGRES_PASSWORD"],
+      let dbhost = ProcessInfo.processInfo.environment["POSTGRES_HOST"],
+      let dbportString = ProcessInfo.processInfo.environment["POSTGRES_PORT"],
+      let dbport = Int32(dbportString)
+        else {
+    print("Database information wasn't found in env")
+    exit(1)
+}
+
 // Waiting for database to be built...
 // @ToDo find a smart way to execute this code when database is built
 sleep(8)
 
-Connexion.setup(context: DbContext(dbname: "ceres_test", user: "admin", pass: "ceres", port: 5432, host: "postgres", options: ConnectionPoolOptions(initialCapacity: 10, maxCapacity: 50), timeout: 60))
+Connexion.setup(context: DbContext(
+        dbname: dbname,
+        user: dbuser,
+        pass: dbpass,
+        port: dbport,
+        host: dbhost,
+        options: ConnectionPoolOptions(initialCapacity: 10, maxCapacity: 50),
+        timeout: 60)
+)
 
 do {
     try PickleMission.createTable()

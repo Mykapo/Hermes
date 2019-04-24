@@ -64,9 +64,10 @@ class AppRouter {
                 next()
             }
 
-            createUserRoutes(with: router)
-            createMissionsRoutes(with: router)
         }
+
+        createUserRoutes(with: router)
+        createMissionsRoutes(with: router)
     }
 
     static func createUserRoutes(with router: Router) {
