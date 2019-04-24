@@ -15,6 +15,8 @@ Connexion.setup(context: DbContext(dbname: "ceres_test", user: "admin", pass: "c
 
 do {
     try PickleMission.createTable()
+    // @ToDo execute that synchronously seems to be a smart option :)
+    sleep(1)
     try PickleUser.createTable()
 } catch let e {
     print(e.localizedDescription)

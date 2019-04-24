@@ -1,9 +1,11 @@
-FROM swift:5.0
+FROM ibmcom/swift-ubuntu:5.0
 
+RUN apt-get install -y --no-install-recommends apt-utils
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get install libz-dev libpq-dev openssl libssl-dev curl -y
 RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 RUN curl -s https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install libz-dev libpq-dev -y
 
 WORKDIR /hermes
 COPY / .
