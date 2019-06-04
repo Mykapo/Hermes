@@ -11,7 +11,7 @@ let package = Package(
         .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.1"),
         .package(url: "https://github.com/IBM-Swift/Kitura-Compression.git", from: "2.2.0"),
         .package(url: "https://github.com/IBM-Swift/Swift-Kuery-PostgreSQL", from: "2.1.0"),
-        .package(url: "https://github.com/Mykapo/GaiaCodables", from: "0.0.0")
+        .package(url: "https://github.com/Mykapo/GaiaCodables", from: "0.0.2")
     ],
     targets: [
         .target(

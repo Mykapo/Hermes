@@ -11,7 +11,7 @@ import GaiaCodables
 class AppRouter {
     public static func setup(router: Router) {
         let cors = CORS(options: Options(allowedOrigin: .all, allowedHeaders: ["Content-Type"]))
-        router.all(middleware: [cors, BodyParser(), Compression()])
+        router.all(middleware: [cors, BodyParser(), Compression(), StaticFileServer()])
     }
 
     public static func createRoutes(with router: Router) {
@@ -63,7 +63,6 @@ class AppRouter {
 
                 next()
             }
-
         }
 
         createUserRoutes(with: router)
@@ -99,17 +98,19 @@ class AppRouter {
     static func createMissionsRoutes(with router: Router) {
         let controller = MissionsController()
 
-        router.get("/:user_id/missions/new") {
+        router.get("/:user_id/missions/new/:n") {
             request, response, next in
 
             guard let requestUserId = request.parameters["user_id"],
-                  let /*userId*/ _ = UUID(uuidString: requestUserId) else {
+                  let /*userId*/ _ = UUID(uuidString: requestUserId),
+                  let nn = request.parameters["n"],
+                  let n = Int(nn) else {
                 response.status(.badRequest)
                 return
             }
 
             var user = defaultUser
-            user.missions.append(contentsOf: Temp.getMissions(2))
+            user.missions.append(contentsOf: Temp.getMissions(n))
 
             do {
                 try response.send(user).end()
@@ -121,8 +122,14 @@ class AppRouter {
             next()
         }
 
-        router.get("/:user_id/:mission_id/success") {
+        router.get("/:user_id/:mission_id/:result") {
             request, response, next in
+
+            guard let resultString = request.parameters["result"],
+                  let result = EloCalculator.Result(rawValue: resultString) else {
+                next()
+                return
+            }
 
             guard let requestUserId = request.parameters["user_id"],
                   let userId = UUID(uuidString: requestUserId),
@@ -133,30 +140,7 @@ class AppRouter {
                 return
             }
 
-            controller.handleMissionEnding(uid: userId, mid: missionId, result: .victory)
-
-            do {
-                try response.send(defaultUser).end()
-            } catch let e {
-                print(e.localizedDescription)
-                response.status(.internalServerError)
-            }
-            next()
-        }
-
-        router.get("/:user_id/:mission_id/failure") {
-            request, response, next in
-
-            guard let requestUserId = request.parameters["user_id"],
-                  let userId = UUID(uuidString: requestUserId),
-                  let rmissionId = request.parameters["mission_id"],
-                  let missionId = UUID(uuidString: rmissionId)
-                    else {
-                response.status(.badRequest)
-                return
-            }
-
-            controller.handleMissionEnding(uid: userId, mid: missionId, result: .defeat)
+            controller.handleMissionEnding(uid: userId, mid: missionId, result: result)
 
             do {
                 try response.send(defaultUser).end()

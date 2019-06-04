@@ -11,20 +11,31 @@ class RelTables {
     private static func getRelCreateTables() -> [String] {
         return [
             """
-            CREATE TABLE IF NOT EXISTS '\(tipsTableName)' (
+            CREATE TABLE IF NOT EXISTS \(tipsTableName) (
                 value TEXT NOT NULL,
-                mission UUID NOT NULL INDEX
+                mission UUID NOT NULL REFERENCES \(PickleMission.tableName)(id)
             );
             """,
             """
-            CREATE TABLE IF NOT EXISTS '\(eloTableName)' (
+            CREATE TABLE IF NOT EXISTS \(eloTableName) (
                 waste SMALLINT,
                 energy SMALLINT,
                 food SMALLINT,
-                mission UUID NOT NULL INDEX,
-                user UUID NOT NULL INDEX
+                mission UUID NOT NULL REFERENCES \(PickleMission.tableName)(id),
+                pickleuser UUID NOT NULL REFERENCES \(PickleUser.tableName)(id)
             ); 
             """
         ]
+    }
+
+    static func createTables() throws {
+        guard let connexion = Connexion.shared else {
+            throw ConnexionImpossible()
+        }
+
+        for query in getRelCreateTables() {
+            connexion.exec(query: query)
+            sleep(1)
+        }
     }
 }

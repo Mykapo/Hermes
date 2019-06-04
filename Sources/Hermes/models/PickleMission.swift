@@ -8,7 +8,7 @@ import GaiaCodables
 class PickleMission {
     var elo = GaiaCodables.Elo(energy: 0, waste: 0, food: 0)
     var id: UUID = UUID()
-    var duration: String? = nil
+    var duration: Int? = nil
     var description: String? = nil
     var image: String? = nil
     var mainSubject: MissionCategory? = nil
@@ -38,14 +38,14 @@ class PickleMission {
         id = UUID()
     }
 
-    init?(from queryResult: [String: Any]) {
+    init?(from queryResult: [String: Any?]) {
         guard let qid = queryResult["id"] as? String,
               let mid = UUID(uuidString: qid) else {
             return
         }
 
         id = mid
-        duration = queryResult["duration"] as? String
+        duration = queryResult["duration"] as? Int
         description = queryResult["description"] as? String
         image = queryResult["image"] as? String
         if let c = queryResult["mainSubject"] as? String {
@@ -60,7 +60,7 @@ class PickleMission {
         return """
             CREATE TABLE IF NOT EXISTS \(tableName) (
                id UUID NOT NULL PRIMARY KEY,
-               duration VARCHAR(20),
+               duration SMALLINT,
                description TEXT,
                image VARCHAR(100),
                mainSubject VARCHAR(15),

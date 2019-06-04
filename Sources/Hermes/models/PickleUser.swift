@@ -29,7 +29,7 @@ class PickleUser : Table {
                    email VARCHAR(320) DEFAULT NULL,
                    nickname VARCHAR(50) DEFAULT NULL,
                    password VARCHAR(60) DEFAULT NULL,
-                   level SMALLINT DEFAULT 1,
+                   level SMALLINT DEFAULT 0,
                    elo UUID UNIQUE
                );
                """

@@ -8,10 +8,10 @@ import GaiaCodables
 typealias MissionCategory = EloCalculator.PickleField
 
 class EloCalculator {
-    enum Result: Double {
-        case victory = 1.0
-        case defeat = 0.0
-        case draw = 0.5
+    enum Result: String {
+        case victory
+        case defeat
+        case draw
     }
 
     enum PickleField : String {
@@ -63,13 +63,23 @@ class EloCalculator {
     }
 
     static func updateElos(of player: inout User, against mission: Mission, result: EloCalculator.Result, for field: EloCalculator.PickleField) {
+        let r: Double
+        switch result {
+        case .defeat:
+            r = 0.0
+        case .draw:
+            r = 0.5
+        case .victory:
+            r = 1.0
+        }
+
         switch field {
         case .energy:
-            player.elo.energy = generateNewElo(for: player.elo.energy, against: mission.elo.energy, result: result.rawValue)
+            player.elo.energy = generateNewElo(for: player.elo.energy, against: mission.elo.energy, result: r)
         case .waste:
-            player.elo.waste = generateNewElo(for: player.elo.waste, against: mission.elo.waste, result: result.rawValue)
+            player.elo.waste = generateNewElo(for: player.elo.waste, against: mission.elo.waste, result: r)
         case .food:
-            player.elo.food = generateNewElo(for: player.elo.food, against: mission.elo.food, result: result.rawValue)
+            player.elo.food = generateNewElo(for: player.elo.food, against: mission.elo.food, result: r)
         }
     }
 }

@@ -37,6 +37,8 @@ do {
     // @ToDo execute that synchronously seems to be a smart option :)
     sleep(1)
     try PickleUser.createTable()
+    sleep(1)
+    try RelTables.createTables()
 } catch let e {
     print(e.localizedDescription)
     exit(1)
