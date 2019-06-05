@@ -10,3 +10,7 @@ Hugo Medina, groupe 5
     * **Framework** = [Kitura](https://www.kitura.io)  
 
 L'API est accessible à l'adresse [http://51.159.28.118:8080](http://51.159.28.118:8080)
+
+## Structure DB
+
+![uml](./pickle_uml.png)
