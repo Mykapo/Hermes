@@ -71,6 +71,8 @@ Where `:result` must be either victory, defeat or draw. Update the user's elo sc
 
 ## JSON Format
 
+As codables are shared between frontend and backend, they are defined in a library you can find on [this repo](https://github.com/Mykapo/GaiaCodables)
+
 ### User
 ```json
 {
