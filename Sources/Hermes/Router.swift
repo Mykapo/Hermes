@@ -75,17 +75,21 @@ class AppRouter {
         router.get("/user/new") {
             request, response, next in
 
-            let user = User(id: UUID(),
-                    email: nil,
-                    nickname: nil,
-                    password: nil,
-                    missions: [],
-                    level: .jeunepousse,
-                    elo: Elo(energy: 0, waste: 0, food: 0)
-            )
+//            let user = User(id: UUID(),
+//                    email: nil,
+//                    nickname: nil,
+//                    password: nil,
+//                    missions: [],
+//                    level: .jeunepousse,
+//                    elo: Elo(energy: 0, waste: 0, food: 0)
+//            )
+
+            let user = PickleUser()
+            user.id = UUID()
+            user.save()
 
             do {
-                try response.send(user).end()
+                try response.send(User(id: user.id, email: nil, nickname: nil, password: nil, missions: nil, level: .jeunepousse, elo: Elo(energy: 0, waste: 0, food: 0))).end()
                 next()
             } catch let e {
                 print(e.localizedDescription)
@@ -93,6 +97,46 @@ class AppRouter {
                 next()
             }
         }
+
+        router.get("/user/:id") {
+            request, response, next in
+
+            print("in here")
+
+            guard let idString = request.parameters["id"],
+                  let id = UUID(uuidString: idString) else {
+
+                response.status(.badRequest)
+                return
+            }
+
+            PickleUser.fetch(id: id) {
+                user, e in
+
+                guard nil == e else {
+                    print(e?.localizedDescription)
+
+                    return
+                }
+
+                guard let user = user else {
+                    _ = try? response.status(.notFound).end()
+                    next()
+                    return
+                }
+
+                do {
+                    let codableUser = user.toCodable() as! User
+                    try response.send(codableUser).end()
+                    next()
+                } catch let err {
+                    print(err.localizedDescription)
+                    _ = try? response.status(.internalServerError).end()
+                    next()
+                }
+            }
+        }
+
     }
 
     static func createMissionsRoutes(with router: Router) {

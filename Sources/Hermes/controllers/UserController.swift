@@ -7,4 +7,7 @@ import Kitura
 import GaiaCodables
 
 class UserController {
+    func newUser() {
+        let user = PickleUser()
+    }
 }

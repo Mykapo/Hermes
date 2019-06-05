@@ -14,6 +14,7 @@ class PickleMission {
     var mainSubject: MissionCategory? = nil
     var explanations: String? = nil
     var tips = [String]()
+    var results: String?
 
     static let tableName = "mission"
 
@@ -117,7 +118,8 @@ class PickleMission {
             mainSubject: mainSubject?.rawValue,
             explanations: explanations,
             tips: tips,
-            elo: elo
+            elo: elo,
+            results: results
         )
     }
 

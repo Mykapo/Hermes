@@ -7,6 +7,7 @@ import Foundation
 class RelTables {
     static let tipsTableName = "tips"
     static let eloTableName = "elo"
+    static let finishedMissionTableName = "user_mission_finished"
 
     private static func getRelCreateTables() -> [String] {
         return [
@@ -24,6 +25,14 @@ class RelTables {
                 mission UUID NOT NULL REFERENCES \(PickleMission.tableName)(id),
                 pickleuser UUID NOT NULL REFERENCES \(PickleUser.tableName)(id)
             ); 
+            """,
+            """
+            CREATE TABLE IF NOT EXISTS \(finishedMissionTableName) (
+                mission UUID NOT NULL REFERENCES \(PickleMission.tableName)(id),
+                pickleuser UUID NOT NULL REFERENCES \(PickleUser.tableName)(id),
+                startedat DATE,
+                isfinished BOOL
+            );
             """
         ]
     }

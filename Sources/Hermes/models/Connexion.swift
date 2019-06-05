@@ -126,6 +126,9 @@ class Connexion {
         psqlConnection.execute(query, parameters: params) {
             results in
 
+            print(results.asError)
+            print(results.asValue)
+
             results.asRows() {
                 result in
 
