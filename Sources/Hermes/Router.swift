@@ -142,7 +142,7 @@ class AppRouter {
     static func createMissionsRoutes(with router: Router) {
         let controller = MissionsController()
 
-        router.get("/:user_id/missions/new/:n") {
+        router.get("/:user_id/missions/new") {
             request, response, next in
 
             guard let requestUserId = request.parameters["user_id"],
