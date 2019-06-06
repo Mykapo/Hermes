@@ -152,7 +152,29 @@ class AppRouter {
             }
 
             var user = defaultUser
-            user.missions.append(contentsOf: Temp.getMissions(4))
+
+            var missions = Temp.getMissions(4)
+            missions.shuffle()
+
+            let ms = [Mission]()
+
+            for m in missions {
+                if m.duration! > 0 {
+                    ms.append(m)
+                }
+            }
+
+            for m in missions {
+                if m.duration == 0 {
+                    ms.append(m)
+                }
+                if ms.count == 3 {
+                    break
+                }
+            }
+
+
+            user.missions.append(contentsOf: missions)
 
             do {
                 try response.send(user).end()

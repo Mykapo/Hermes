@@ -88,6 +88,66 @@ class Temp {
 
     static func getMissions(_ n: Int) -> [Mission] {
 
-        return [m1, m2, m3, m4]
+        return [m1, m2, m3, m4] + [
+            Mission(
+                    id: UUID("aea13eae-8831-11e9-bc42-526af7764f64"),
+                    duration: 0,
+                    description: "Supprimer ses anciens mails",
+                    image: "supprimer-email.jpg",
+                    mainSubject: "energy",
+                    explanations: "La pollution numérique émet autant de gaz à effet de serre que l'aviation civile ! Si 1 000 personnes effacent 160 e-mails, on économise l'équivalent en émission de CO2 d'un aller-retour Paris/New York.",
+                    tips: ["Supprimez vos anciens mails avec photos ou vidéos une fois les fichiers récupérés.","Désabonnez-vous des newsletters qui ne vous intéressent plus.","Utilisez CleanFox pour faciliter cette démarche ! (https://www.cleanfox.io/fr-FR/)"
+                    ],
+                    elo: Elo(energy: 100, waste: 0, food: 0),
+                    results: "0,004kg de CO2 par jour",
+                    bgColor: .green
+            ),Mission(
+                    id: UUID("aea1435e-8831-11e9-bc42-526af7764f64"),
+                    duration: 0,
+                    description: "Changer pour un moteur de recherche responsable",
+                    image: "moteur-recherche-responsable.jpg",
+                    mainSubject: "energy",
+                    explanations: "L'impact environnemental du numérique est gigantesque, et continue à augmenter chaque jour : une recherche Google émet 7 grammes de CO2, soit l'équivalent d'un kilomètre en voiture pour 30 recherches ! Imaginez alors le résultat pour une moyenne de 100 milliards de recherches par mois ! Un des meilleurs moyens d'inverser la tendance est d'utiliser des moteurs de recherche engagés et responsables, comme Ecosia ou Lilo !",
+                    tips: ["Utilisez un moteur de recherche qui agit pour la planète et notre bien-être ! Ecosia, qui vous permet de planter des arbres pour chaque recherche, ou Lilo, qui vous permet de cumuler des crédits que vous pouvez répartir entre plusieurs associations, écologiques ou humanitaires."],
+                    elo: Elo(energy: 140, waste: 0, food: 0),
+                    results: "0,007kg de CO2 par jour",
+                    bgColor: .green
+            ),Mission(
+                    id: UUID("aea1448a-8831-11e9-bc42-526af7764f64"),
+                    duration: 3,
+                    description: "Penser à ses sacs réutilisables pour les courses",
+                    image: "sac-reutilisable.jpg",
+                    mainSubject: "waste",
+                    explanations: "Avant l'interdiction des sacs plastiques à usage unique de 2016, près de 17 milliards de sacs en polyéthylène, plastiques fabriqués à partir du pétrole, étaient distribués en France chaque année. Malgré cette interdiction, on retrouve toujours des sacs en papier ou plastique en vente aux caisses des supermarchés ou chez les commerçants. Le plus simple pour lutter ? Toujours avoir un sac réutilisable sur soi : ça ne prend pas de place, coûte moins cher et surtout, aide à la préservation de la planète et des océans.",
+                    tips: [
+                        "Ayez toujours un sac en tissu plié dans votre sac !",
+                        "Vous avez peur d'oublier ? Programmez un rappel pour le prendre lors de votre jour de courses habituel !"
+                    ],
+                    elo: Elo(energy: 0, waste: 160, food: 0),
+                    results: "0,0022kg de CO2 par jour",
+                    bgColor: .pink
+            ),Mission(
+                    id: UUID(),
+                    duration: 0,
+                    description: "Choisir des œufs de poules élevées en plein air",
+                    image: "oeufs-plein-air.jpg",
+                    mainSubject: "food",
+                    explanations: """
+                                  Il est facile de se faire avoir par une photo de poule gambadant dans l'herbe sur une boîte d'œufs. Pourtant, aujourd'hui, 70% des œufs consommés sont issus d'élevage de poules en batterie.
+                                          Il existe un moyen très facile de déterminer la provenance des œufs, grâce au code indiqué sur la coquille !
+                                          0 : œufs bio de poules élevées en plein air
+                                          1 : œufs de poules élevées en plein air
+                                          2 : œufs de poules élevées au sol ne voyant jamais le jour
+                                          3 : œufs de poules élevées en cage ne voyant jamais le jour
+                                  """,
+                    tips: [
+                        "Regardez quel chiffre se trouve sur vos œufs : privilégiez les œufs marqués d'un 0 ou 1, à la rigueur",
+        "Si vous avez un doute, optez pour des œufs bio : ce sont forcément des 0 !"
+        ],
+        elo: Elo(energy: 0, waste: 0, food: 100),
+        results: "0,13 kg de CO2 par jour",
+        bgColor: .green
+        )
+        ]
     }
 }
