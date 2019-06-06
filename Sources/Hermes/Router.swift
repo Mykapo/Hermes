@@ -156,7 +156,7 @@ class AppRouter {
             var missions = Temp.getMissions(4)
             missions.shuffle()
 
-            let ms = [Mission]()
+            var ms = [Mission]()
 
             for m in missions {
                 if m.duration! > 0 {

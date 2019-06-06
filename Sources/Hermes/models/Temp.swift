@@ -151,3 +151,9 @@ class Temp {
         ]
     }
 }
+
+extension UUID {
+    init?(_ id: String) {
+        self.init(uuidString: id)
+    }
+}
