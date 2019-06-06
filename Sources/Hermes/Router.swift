@@ -146,15 +146,13 @@ class AppRouter {
             request, response, next in
 
             guard let requestUserId = request.parameters["user_id"],
-                  let /*userId*/ _ = UUID(uuidString: requestUserId),
-                  let nn = request.parameters["n"],
-                  let n = Int(nn) else {
+                  let /*userId*/ _ = UUID(uuidString: requestUserId) else {
                 response.status(.badRequest)
                 return
             }
 
             var user = defaultUser
-            user.missions.append(contentsOf: Temp.getMissions(n))
+            user.missions.append(contentsOf: Temp.getMissions(4))
 
             do {
                 try response.send(user).end()

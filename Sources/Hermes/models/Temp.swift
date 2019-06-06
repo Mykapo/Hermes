@@ -33,7 +33,8 @@ class Temp {
                 "Utilisez CleanFox pour faciliter cette démarche ! (https://www.cleanfox.io/fr-FR/)",
             ],
             elo: Elo(energy: 10, waste: 0, food: 0),
-            results: "0,004kg de CO2 par jour"
+            results: "0,004kg de CO2 par jour",
+            bgColor: .green
     )
 
     static let m2 = Mission(
@@ -49,7 +50,8 @@ class Temp {
                 "Les ajouter au fur et à mesure, pas la peine de le faire d'un seul coup",
             ],
             elo: Elo(energy: 10, waste: 0, food: 0),
-            results: "0,0036kg de CO2 par jour"
+            results: "0,0036kg de CO2 par jour",
+            bgColor: .purple
     )
 
     static let m3 = Mission(
@@ -64,7 +66,8 @@ class Temp {
                 "Privilégiez l'inox car il résiste au froid et à la chaleur... et ça évite le plastique !"
             ],
             elo: Elo(energy: 0, waste: 20, food: 0),
-            results: "0,033kg de déchet par jour"
+            results: "0,033kg de déchet par jour",
+            bgColor: .purple
     )
 
     static let m4 = Mission(id: UUID(uuidString: "5b2b5087-7db2-4fe0-87ff-eda0e2d1e958"), 
@@ -78,7 +81,9 @@ class Temp {
 "Toutes les jeter ne servira à rien (et peut vous coûter une petite fortune !). Pensez à les remplacer au fur et à mesure que vos anciennes ampoules ne fonctionnent plus.",
 "Munissez-vous à l'avance d'une ou deux ampoules basse consommation, vous serez d'ores et déjà paré(e) en cas de panne !"
             ], elo: Elo(energy: 200, waste: 0, food: 0),
-            results: "0,0017kg de CO2 par jour"
+            results: "0,0017kg de CO2 par jour",
+            bgColor: .purple
+
     )
 
     static func getMissions(_ n: Int) -> [Mission] {

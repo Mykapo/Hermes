@@ -15,6 +15,7 @@ class PickleMission {
     var explanations: String? = nil
     var tips = [String]()
     var results: String?
+    var bgColor : BGColor?
 
     static let tableName = "mission"
 
@@ -119,7 +120,8 @@ class PickleMission {
             explanations: explanations,
             tips: tips,
             elo: elo,
-            results: results
+            results: results,
+            bgColor: bgColor
         )
     }
 
